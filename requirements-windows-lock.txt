@@ -1,0 +1,27 @@
+# Windows build environment, Python 3.13; install project separately.
+altgraph==0.17.5
+bleak==3.0.2
+bottle==0.13.4
+cffi==2.1.1
+clr_loader==0.3.1
+packaging==26.3
+pefile==2024.8.26
+proxy_tools==0.1.0
+pycparser==3.12
+pycryptodome==3.23.0
+pyinstaller==6.22.3
+pyinstaller-hooks-contrib==2026.9
+pythonnet==3.2.1
+pywebview==6.2.1
+pywin32-ctypes==0.2.3
+setuptools==84.2.1
+typing_extensions==4.16.0
+winrt-runtime==4.0.0
+winrt-Windows.Devices.Bluetooth==4!10.0.28000.2705
+winrt-Windows.Devices.Bluetooth.Advertisement==4!10.0.28000.2705
+winrt-Windows.Devices.Bluetooth.GenericAttributeProfile==4!10.0.28000.2705
+winrt-Windows.Devices.Enumeration==4!10.0.28000.2705
+winrt-Windows.Devices.Radios==4!10.0.28000.2705
+winrt-Windows.Foundation==4!10.0.28000.2705
+winrt-Windows.Foundation.Collections==4!10.0.28000.2705
+winrt-Windows.Storage.Streams==4!10.0.28000.2705

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CubeDesk Community Edition</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
+<body>
+ <header class="topbar"><a class="wordmark" href="/" aria-label="CubeDesk Community 主练习页"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 12 7v13l-12 7-12-7V10Zm0 0v14m12-7-12 7-12-7m12 7v13"/></svg><span>CubeDesk <small>COMMUNITY EDITION</small></span></a><nav><button id="connectOpen" class="connection"><span id="connectionDot" class="dot"></span><span id="connectionLabel">连接魔方</span></button><button id="settingsOpen" class="quiet">设置</button></nav></header>
+ <main>
+  <section class="practice" aria-labelledby="practiceHeading">
+   <div class="practice-top"><div><p class="eyebrow">练习 / 三阶</p><h1 id="practiceHeading">从这一把开始。</h1></div><span id="modeLabel" class="mode-label">等待连接</span></div>
+   <div class="session-layout">
+    <div class="stage"><canvas id="cube" aria-label="三阶魔方模型，可拖动调整视角"></canvas><button id="resetView" class="view-reset">标准视角</button><p class="orientation">白色朝上 · 绿色朝前</p></div>
+    <div class="session-details"><p id="phaseLabel" class="phase-label" role="status">先连接智能魔方，也可以进入明确标注的演示模式。</p><div id="clock" class="clock" aria-label="当前用时">0.00<span>秒</span></div><div id="metrics" class="metrics" hidden><div><span>步数 · QTM</span><strong id="turns">—</strong></div><div><span>TPS · QTM</span><strong id="tps">—</strong></div></div><div class="session-actions"><button id="newScramble" class="primary">生成打乱</button><button id="cancelRun" class="quiet" hidden>取消本局</button></div><p id="flowHint" class="flow-hint">连接成功后，按打乱提示操作；首转开始计时，复原时自动结束。</p></div>
+   </div>
+   <section class="scramble-area" aria-labelledby="scrambleHeading"><div class="section-title"><h2 id="scrambleHeading">打乱序列</h2><span id="scrambleProgress">等待生成</span></div><p id="scramble" class="scramble"><span class="placeholder">打乱会显示在这里。</span></p><p id="recovery" class="recovery" hidden></p></section>
+   <section id="simulationPanel" class="simulation-panel" hidden><div class="section-title"><h2>演示控制</h2><span>模拟事件 · 不是真实魔方成绩</span></div><div id="moveButtons" class="move-buttons"></div><div class="demo-actions"><button id="demoScramble" class="quiet">演示执行打乱</button><button id="demoReset" class="quiet">重置演示</button></div></section>
+  </section>
+  <section class="history" aria-labelledby="historyHeading"><div class="section-title"><h2 id="historyHeading">最近练习</h2><span>仅存本机</span></div><ol id="records" class="records"><li class="empty">还没有记录。完成第一把后，成绩会出现在这里。</li></ol><p class="edition-note">Community 是精简基础版，独立于 CubeDesk 正式版。记录和设置不会互相覆盖。</p></section>
+ </main>
+ <dialog id="connectDialog"><div class="dialog-head"><h2>连接智能魔方</h2><button data-close="connectDialog" class="close" aria-label="关闭连接窗口">×</button></div><p class="muted">请唤醒魔方，关闭其他占用它的应用，并开启蓝牙。此基础版只包含 MoYu32 适配器；历史实测型号为威龙 V10 AI。</p><div class="dialog-actions"><button id="scan" class="primary">扫描附近魔方</button><button id="disconnect" class="quiet">断开连接</button><button id="refresh" class="quiet">刷新状态</button></div><p id="scanNote" class="muted" role="status">未连接设备。没有实体魔方也可以使用下方演示模式学习流程。</p><ul id="devices" class="devices"></ul><details><summary>广播没有提供 MAC？</summary><label>魔方真实 MAC（仅本次连接使用）<input id="manualMac" maxlength="17" autocomplete="off" spellcheck="false" placeholder="从设备或官方说明中获取"></label><p class="muted">地址不会保存或写入成绩。不要在公开反馈中粘贴真实设备标识。</p></details><div class="demo-entry"><button id="simulation">进入演示模式</button><p class="muted">用模拟转动验证状态、打乱、计时和记录，界面与成绩会保留“演示”标记。</p></div></dialog>
+ <dialog id="settingsDialog"><div class="dialog-head"><h2>基础设置</h2><button data-close="settingsDialog" class="close" aria-label="关闭设置">×</button></div><label class="setting-row" for="skin">魔方模型<select id="skin"><option value="classic">经典六色</option><option value="diamond">棱光星钻</option></select></label><p class="muted">使用原有 WebGL 几何与星钻反光；不加载网络贴图。手机旋转时布局会随屏幕调整。</p><hr><p class="muted">计时采用主机单调时钟。步数采用 QTM：90° 一步、180° 两步；TPS 使用相同口径。批量蓝牙通知的时间精度会在记录中保留说明。</p><p class="muted">此版本不包含完整版的高级主题、成就视频、长期统计和开发板联动。</p><p class="muted">开源基础版 · MIT License。第三方许可单独保留；完整正式版独立维护。</p></dialog>
+ <dialog id="recordDialog"><div class="dialog-head"><h2>单次记录 · JSON</h2><button data-close="recordDialog" class="close" aria-label="关闭记录">×</button></div><pre id="recordJson"></pre><p class="muted">包含本次转动、时间来源和起止状态，供开发者自行增加分析。</p></dialog>
+ <div id="notice" class="notice" role="status" hidden></div>
+ <script src="renderer/skins.js"></script><script src="renderer/cube3d.js"></script><script src="app.js"></script>
+</body></html>
